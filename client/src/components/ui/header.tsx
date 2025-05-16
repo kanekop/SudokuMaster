@@ -31,9 +31,11 @@ export default function Header() {
   return (
     <header className="bg-primary text-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href="/">
-          <a className="text-xl font-medium">数独アプリ</a>
-        </Link>
+        <div className="text-xl font-medium">
+          <Link href="/">
+            数独アプリ
+          </Link>
+        </div>
 
         <div className="flex items-center space-x-2">
           <Button
