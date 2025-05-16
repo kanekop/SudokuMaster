@@ -102,7 +102,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [selectedCell, board]);
 
-  // Auto-save game progress every 30 seconds
+  // 30秒ごとに自動保存を行う
   useEffect(() => {
     if (!game || game.isCompleted) return;
 
@@ -280,16 +280,23 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Save game progress without notification
   const saveGameProgress = async () => {
-    if (!game) return;
+    if (!game || game.isCompleted) return;
     
     try {
       const res = await apiRequest('PATCH', `/api/games/${game.id}`, { 
         currentBoard: board,
-        timeSpent: time
+        timeSpent: time,
+        // completedAtはnullのままに
+        completedAt: null
       });
-      const updatedGame = await res.json();
-      setGame(updatedGame);
+      
+      // 応答が成功した場合、ゲーム状態を更新
+      if (res.ok) {
+        const updatedGame = await res.json();
+        setGame(updatedGame);
+      }
     } catch (error) {
+      // エラーはコンソールに記録するだけで、ユーザーには通知しない
       console.error("Failed to auto-save game:", error);
     }
   };
