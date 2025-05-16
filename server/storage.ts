@@ -205,32 +205,44 @@ export class DatabaseStorage implements IStorage {
   async updateGame(id: number, data: Partial<Game>): Promise<Game> {
     console.log("UpdateGame called with data:", JSON.stringify(data));
     
-    // 日付文字列を Date オブジェクトに変換
-    const processedData = { ...data };
+    // データの安全な処理
+    const processedData: Record<string, any> = {};
     
-    // 日付に関する処理を安全に行う
-    if (processedData.completedAt !== undefined) {
-      // completedAt が文字列の場合は Date オブジェクトに変換
-      if (processedData.completedAt !== null && typeof processedData.completedAt === 'string') {
-        try {
-          processedData.completedAt = new Date(processedData.completedAt);
-          console.log("Converted completedAt to Date:", processedData.completedAt);
-        } catch (e) {
-          console.error("Error converting completedAt to Date:", e);
-          // エラーが発生した場合は現在時刻を使用
-          processedData.completedAt = new Date();
+    // 基本データをコピー
+    for (const [key, value] of Object.entries(data)) {
+      // completedAt は特別処理
+      if (key === 'completedAt') {
+        if (value === null || value === undefined) {
+          // null または undefined の場合はそのまま
+          processedData[key] = null;
+        } else if (value instanceof Date) {
+          // Date オブジェクトならそのまま
+          processedData[key] = value;
+        } else if (typeof value === 'string') {
+          try {
+            // 文字列なら Date に変換
+            processedData[key] = new Date(value);
+          } catch (e) {
+            console.error("Error converting completedAt string to Date:", e);
+            // エラー時は現在時刻
+            processedData[key] = new Date();
+          }
+        } else {
+          // その他の値の場合は null に設定
+          console.warn(`Unexpected completedAt value type: ${typeof value}`);
+          processedData[key] = null;
         }
+      } else {
+        // その他のフィールドはそのままコピー
+        processedData[key] = value;
       }
     }
     
+    // 更新日時は常に現在時刻
+    processedData.updatedAt = new Date();
+    
     try {
-      // データベース更新に使用するオブジェクトを作成
-      const updateObj: any = {
-        ...processedData,
-        updatedAt: new Date()
-      };
-      
-      console.log("Final update object:", JSON.stringify(updateObj, (key, value) => {
+      console.log("Final update object:", JSON.stringify(processedData, (key, value) => {
         if (value instanceof Date) {
           return value.toISOString();
         }
@@ -239,7 +251,7 @@ export class DatabaseStorage implements IStorage {
       
       const [updatedGame] = await db
         .update(games)
-        .set(updateObj)
+        .set(processedData)
         .where(eq(games.id, id))
         .returning();
       
