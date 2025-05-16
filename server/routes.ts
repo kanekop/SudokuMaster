@@ -36,6 +36,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid difficulty level" });
       }
       
+      // 既存のアクティブゲームを確認
+      const activeGame = await storage.getActiveGameByUserId(userId);
+      
+      // アクティブゲームが存在する場合は完了状態に変更
+      if (activeGame && !activeGame.isCompleted) {
+        console.log(`Marking existing active game ${activeGame.id} as completed to start new game`);
+        await storage.updateGame(activeGame.id, {
+          isCompleted: true,
+          completedAt: new Date()
+        });
+      }
+      
       // Get existing puzzles at this difficulty or generate a new one
       let puzzles = await storage.getPuzzlesByDifficulty(difficultyLevel);
       
@@ -50,8 +62,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         puzzles = [newPuzzle];
       }
       
-      // Randomly select a puzzle from available ones
-      const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
+      // 使用済みのパズルIDを取得して除外する
+      const userGames = await storage.getGamesByUserId(userId, { status: 'all' });
+      const usedPuzzleIds = new Set(userGames.map(game => game.puzzleId));
+      
+      // 未使用のパズルをフィルタリング
+      const unusedPuzzles = puzzles.filter(puzzle => !usedPuzzleIds.has(puzzle.id));
+      
+      // 未使用のパズルがあれば、そこからランダム選択
+      // なければ全パズルからランダム選択
+      const availablePuzzles = unusedPuzzles.length > 0 ? unusedPuzzles : puzzles;
+      const puzzle = availablePuzzles[Math.floor(Math.random() * availablePuzzles.length)];
       
       // Create a new game
       const game = await storage.createGame({
