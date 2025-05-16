@@ -43,6 +43,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (activeGame && !activeGame.isCompleted) {
         console.log(`Marking existing active game ${activeGame.id} as completed to start new game`);
         await storage.updateGame(activeGame.id, {
+          // 現在の状態を保持
+          currentBoard: activeGame.currentBoard,
+          timeSpent: activeGame.timeSpent,
+          // 完了状態に変更
           isCompleted: true,
           completedAt: new Date()
         });
