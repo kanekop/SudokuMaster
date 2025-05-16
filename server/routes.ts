@@ -52,37 +52,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
-      // Get existing puzzles at this difficulty or generate a new one
-      let puzzles = await storage.getPuzzlesByDifficulty(difficultyLevel);
+      // 新しいゲームを開始する場合は常に新しいパズルを生成する
+      console.log(`Generating new puzzle for difficulty level ${difficultyLevel}`);
+      const { initialBoard, solvedBoard } = generateSudoku(difficultyLevel);
       
-      if (puzzles.length === 0) {
-        // Generate a new puzzle
-        const { initialBoard, solvedBoard } = generateSudoku(difficultyLevel);
-        const newPuzzle = await storage.createPuzzle({
-          initialBoard,
-          solvedBoard,
-          difficultyLevel
-        });
-        puzzles = [newPuzzle];
-      }
+      // 新しいパズルをデータベースに保存
+      const newPuzzle = await storage.createPuzzle({
+        initialBoard,
+        solvedBoard,
+        difficultyLevel
+      });
       
-      // 使用済みのパズルIDを取得して除外する
-      const userGames = await storage.getGamesByUserId(userId, { status: 'all' });
-      const usedPuzzleIds = new Set(userGames.map(game => game.puzzleId));
+      // 既存のパズルも取得（統計用）
+      const existingPuzzles = await storage.getPuzzlesByDifficulty(difficultyLevel);
+      console.log(`There are now ${existingPuzzles.length} puzzles at difficulty level ${difficultyLevel}`);
       
-      // 未使用のパズルをフィルタリング
-      const unusedPuzzles = puzzles.filter(puzzle => !usedPuzzleIds.has(puzzle.id));
+      // 新しく生成したパズルを直接使用する
       
-      // 未使用のパズルがあれば、そこからランダム選択
-      // なければ全パズルからランダム選択
-      const availablePuzzles = unusedPuzzles.length > 0 ? unusedPuzzles : puzzles;
-      const puzzle = availablePuzzles[Math.floor(Math.random() * availablePuzzles.length)];
-      
-      // Create a new game
+      // 新しく生成したパズルでゲームを作成
       const game = await storage.createGame({
         userId,
-        puzzleId: puzzle.id,
-        currentBoard: puzzle.initialBoard,
+        puzzleId: newPuzzle.id,
+        currentBoard: newPuzzle.initialBoard,
         isCompleted: false,
         timeSpent: 0,
         startedAt: new Date()
@@ -90,7 +81,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.status(201).json({
         ...game,
-        puzzle
+        puzzle: newPuzzle
       });
     } catch (error) {
       console.error("Error creating game:", error);
