@@ -99,7 +99,7 @@ export const updateGameSchema = z.object({
   currentBoard: z.array(z.array(z.number().nullable())),
   isCompleted: z.boolean().optional(),
   timeSpent: z.number().optional(),
-  completedAt: z.date().optional().nullable(),
+  completedAt: z.string().optional().nullable(),
 });
 export const insertSharedPuzzleSchema = createInsertSchema(sharedPuzzles).omit({ id: true, sharedAt: true, isPlayed: true });
 export const insertFriendSchema = createInsertSchema(friends).omit({ id: true, createdAt: true });
