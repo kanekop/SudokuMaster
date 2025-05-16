@@ -203,10 +203,18 @@ export class DatabaseStorage implements IStorage {
   }
 
   async updateGame(id: number, data: Partial<Game>): Promise<Game> {
+    // 日付文字列を Date オブジェクトに変換
+    const processedData = { ...data };
+    
+    // completedAt が文字列の場合は Date オブジェクトに変換
+    if (processedData.completedAt && typeof processedData.completedAt === 'string') {
+      processedData.completedAt = new Date(processedData.completedAt);
+    }
+    
     const [updatedGame] = await db
       .update(games)
       .set({
-        ...data,
+        ...processedData,
         updatedAt: new Date()
       })
       .where(eq(games.id, id))
