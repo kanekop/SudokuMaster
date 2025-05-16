@@ -209,9 +209,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(403).json({ message: "You don't have permission to update this game" });
       }
       
+      // デバッグ用にリクエストボディをログ出力
+      console.log("Update game request body:", JSON.stringify(req.body));
+      
       // Validate update data
       const validationResult = updateGameSchema.safeParse(req.body);
       if (!validationResult.success) {
+        console.log("Validation errors:", JSON.stringify(validationResult.error.errors));
         return res.status(400).json({ 
           message: "Invalid game data", 
           errors: validationResult.error.errors 
@@ -219,6 +223,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       const updateData = validationResult.data;
+      console.log("Validated data:", JSON.stringify(updateData));
       
       // Update the game
       const updatedGame = await storage.updateGame(gameId, updateData);

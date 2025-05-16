@@ -203,23 +203,52 @@ export class DatabaseStorage implements IStorage {
   }
 
   async updateGame(id: number, data: Partial<Game>): Promise<Game> {
+    console.log("UpdateGame called with data:", JSON.stringify(data));
+    
     // 日付文字列を Date オブジェクトに変換
     const processedData = { ...data };
     
-    // completedAt が文字列の場合は Date オブジェクトに変換
-    if (processedData.completedAt && typeof processedData.completedAt === 'string') {
-      processedData.completedAt = new Date(processedData.completedAt);
+    // 日付に関する処理を安全に行う
+    if (processedData.completedAt !== undefined) {
+      // completedAt が文字列の場合は Date オブジェクトに変換
+      if (processedData.completedAt !== null && typeof processedData.completedAt === 'string') {
+        try {
+          processedData.completedAt = new Date(processedData.completedAt);
+          console.log("Converted completedAt to Date:", processedData.completedAt);
+        } catch (e) {
+          console.error("Error converting completedAt to Date:", e);
+          // エラーが発生した場合は現在時刻を使用
+          processedData.completedAt = new Date();
+        }
+      }
     }
     
-    const [updatedGame] = await db
-      .update(games)
-      .set({
+    try {
+      // データベース更新に使用するオブジェクトを作成
+      const updateObj: any = {
         ...processedData,
         updatedAt: new Date()
-      })
-      .where(eq(games.id, id))
-      .returning();
-    return updatedGame;
+      };
+      
+      console.log("Final update object:", JSON.stringify(updateObj, (key, value) => {
+        if (value instanceof Date) {
+          return value.toISOString();
+        }
+        return value;
+      }));
+      
+      const [updatedGame] = await db
+        .update(games)
+        .set(updateObj)
+        .where(eq(games.id, id))
+        .returning();
+      
+      console.log("Game updated successfully:", JSON.stringify(updatedGame));
+      return updatedGame;
+    } catch (error) {
+      console.error("Error in updateGame:", error);
+      throw error;
+    }
   }
   
   // Shared puzzle operations

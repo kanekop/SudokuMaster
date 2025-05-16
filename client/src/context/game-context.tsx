@@ -237,7 +237,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
         currentBoard: board,
         isCompleted: true,
         timeSpent: time,
-        completedAt: new Date().toISOString()
+        completedAt: new Date()
       });
       return res.json();
     },

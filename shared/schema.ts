@@ -99,7 +99,16 @@ export const updateGameSchema = z.object({
   currentBoard: z.array(z.array(z.number().nullable())),
   isCompleted: z.boolean().optional(),
   timeSpent: z.number().optional(),
-  completedAt: z.string().optional().nullable(),
+  completedAt: z.union([z.date(), z.string(), z.null()]).optional()
+    .transform(val => {
+      if (val === null) return null;
+      if (val instanceof Date) return val;
+      try {
+        return new Date(val);
+      } catch (e) {
+        return new Date();
+      }
+    }),
 });
 export const insertSharedPuzzleSchema = createInsertSchema(sharedPuzzles).omit({ id: true, sharedAt: true, isPlayed: true });
 export const insertFriendSchema = createInsertSchema(friends).omit({ id: true, createdAt: true });
