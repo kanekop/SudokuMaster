@@ -1,0 +1,49 @@
+Warning: validateDOMNesting(...): %s cannot appear as a descendant of <%s>.%s <a> a 
+    at a
+    at a
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=67fa04b1:337:18
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:79:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:56:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:123:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:79:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:56:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:123:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:79:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:56:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-3UA26HZX.js?v=67fa04b1:51:15
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6KPVJ6WU.js?v=67fa04b1:143:7
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=67fa04b1:119:13
+    at _c3 (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/src/components/ui/tabs.tsx:47:12)
+    at div
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:123:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:79:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:56:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:123:13
+    at Provider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:28:15)
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6KPVJ6WU.js?v=67fa04b1:52:5
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:79:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LXTJ4TFU.js?v=67fa04b1:56:13
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-3UA26HZX.js?v=67fa04b1:39:15
+    at Provider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:28:15)
+    at CollectionProvider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-3UA26HZX.js?v=67fa04b1:29:13)
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-6KPVJ6WU.js?v=67fa04b1:46:76
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=67fa04b1:91:13
+    at _c (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/src/components/ui/tabs.tsx:22:11)
+    at div
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:123:13
+    at Provider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:28:15)
+    at https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=67fa04b1:49:7
+    at div
+    at Game (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/src/pages/game.tsx:33:31)
+    at Route (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=67fa04b1:323:16)
+    at Switch (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=67fa04b1:379:17)
+    at main
+    at div
+    at Router
+    at GameProvider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/src/context/game-context.tsx:26:32)
+    at Provider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EH4BSTIW.js?v=67fa04b1:28:15)
+    at TooltipProvider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=67fa04b1:58:5)
+    at QueryClientProvider (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=67fa04b1:2805:3)
+    at App
+    at V (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/next-themes.js?v=67fa04b1:44:25)
+    at J (https://155de5a0-2096-423f-901b-69fd0d81df81-00-14rzms8q1hfhc.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/next-themes.js?v=67fa04b1:42:18)

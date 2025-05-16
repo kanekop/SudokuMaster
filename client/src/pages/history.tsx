@@ -126,27 +126,21 @@ export default function History() {
         <Tabs value="history" className="w-full">
           <TabsList className="bg-transparent">
             <TabsTrigger value="game" asChild>
-              <Link href="/game">
-                <a className="flex items-center">
-                  <Grid className="h-4 w-4 mr-2" />
-                  ゲーム
-                </a>
+              <Link href="/game" className="flex items-center">
+                <Grid className="h-4 w-4 mr-2" />
+                ゲーム
               </Link>
             </TabsTrigger>
             <TabsTrigger value="history" asChild>
-              <Link href="/history">
-                <a className="flex items-center">
-                  <HistoryIcon className="h-4 w-4 mr-2" />
-                  履歴
-                </a>
+              <Link href="/history" className="flex items-center">
+                <HistoryIcon className="h-4 w-4 mr-2" />
+                履歴
               </Link>
             </TabsTrigger>
             <TabsTrigger value="friends" asChild>
-              <Link href="/friends">
-                <a className="flex items-center">
-                  <Users className="h-4 w-4 mr-2" />
-                  友達
-                </a>
+              <Link href="/friends" className="flex items-center">
+                <Users className="h-4 w-4 mr-2" />
+                友達
               </Link>
             </TabsTrigger>
           </TabsList>
